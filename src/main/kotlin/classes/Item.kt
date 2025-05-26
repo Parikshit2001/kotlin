@@ -12,4 +12,5 @@ class Item() {
 fun main() {
     val item = Item("IPhone")
     println(item.name)
+    println(item)
 }
