@@ -3,6 +3,7 @@ package org.example.interfaces
 import org.example.classes.Course
 
 interface CourseRepository {
+    val isCoursePersisted: Boolean
     fun getById(id: Int): Course
 
     fun save(course: Course): Int {
@@ -16,8 +17,15 @@ interface Repository {
 }
 
 class SqlCourseRepository : CourseRepository, Repository {
+    override var isCoursePersisted: Boolean = false
+
     override fun getById(id: Int): Course {
         return Course(id, "Reactive Programming", "Parik")
+    }
+
+    override fun save(course: Course): Int {
+        isCoursePersisted = true
+        return super.save(course)
     }
 
     override fun getAll(): Any {
@@ -26,6 +34,8 @@ class SqlCourseRepository : CourseRepository, Repository {
 }
 
 class NoSqlCourseRepository : CourseRepository {
+    override val isCoursePersisted: Boolean = false
+
     override fun getById(id: Int): Course {
         return Course(id, "Reactive Programming", "Parik")
     }
@@ -62,6 +72,7 @@ fun main() {
     val course = sqlCourseRepository.getById(1)
     println("Course is $course")
     val courseID = sqlCourseRepository.save(Course(5, "Reactive Programming", "Parik"))
+    println("Course persisted value is ${sqlCourseRepository.isCoursePersisted}")
     println("Saved courseId is $courseID")
 
     val noSqlCourseRepository = NoSqlCourseRepository()
