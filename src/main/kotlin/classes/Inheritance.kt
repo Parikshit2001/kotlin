@@ -5,6 +5,14 @@ open class User(val name: String) {
     open fun login() {
         println("Insdie User Login")
     }
+
+    private fun secret() {
+        println("Insdie User Secret [private]")
+    }
+
+    protected open fun logout() {
+        println("Insdie User Logout [protected open]")
+    }
 }
 
 class Student(name: String) : User(name) {
@@ -19,6 +27,10 @@ class Student(name: String) : User(name) {
         println("Inside Student login")
     }
 
+    override fun logout(){
+        super.logout()
+        println("Inside Student logout [override]")
+    }
 }
 
 class Instructor(name: String) : User(name) {}
@@ -38,4 +50,6 @@ fun main() {
     println(country)
 
     println(Student.noOfEnrolledCourses)
+
+    val user = User("Dilip")
 }
