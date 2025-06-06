@@ -18,7 +18,8 @@ fun main() {
 
 fun castNumber(any: Any) {
     when (any) {
-        any as Double -> println("Value id Double")
+        any as? Double -> println("Value id Double")
+        any as? Int -> println("Value id Double")
     }
 }
 
